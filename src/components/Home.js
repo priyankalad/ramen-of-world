@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CallAPI from "../callAPI";
 import Search from "./Search";
 import List from "./List";
+import ramenData from "../data/ramenData";
 
 export default function Home() {
   const [restos, setRestos] = useState([]);
@@ -21,7 +22,12 @@ export default function Home() {
         setRestos(restaurants);
         setFilteredRestos(restaurants);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        setYears(getYears(ramenData));
+        setRestos(ramenData);
+        setFilteredRestos(ramenData);
+      });
     return () => {};
   }, []);
   let handleSearch = (year, country) => {
